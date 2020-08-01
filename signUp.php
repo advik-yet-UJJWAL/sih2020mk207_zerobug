@@ -10,7 +10,8 @@
 
 </head>
 <body>
-   
+   <div class="container">
+           <img src="images/signup_illustration.png"/>
    <div class="login-wrap">
 	<div class="login-html">
 		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
@@ -86,7 +87,7 @@
         }
     </script> -->
 
-
+    </div>
 
 </body>
 </html>
