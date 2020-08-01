@@ -1,39 +1,38 @@
 <?php 
   
+  $servername = "localhost";
+  $username = "root";
+  $dbname = "zerobug";
   
-    
-         $email = $password ="";
+  $conn = new mysqli($servername, $username,null,$dbname);
+
+  if($conn->connect_error){
+    die("Connection failed:".$conn->connect_error);
+}
             
-            if($_SERVER["REQUEST_METHOD"] == "POST"){
-                $email = $_POST["email"];
-                $password = $_POST["password"];
+            if(isset($_POST['login'])){
+                $email = $conn->real_escape_string(strip_tags($_POST["email"]));
+                $password = $conn->real_escape_string(strip_tags($_POST["password"]));
+
                 
-                
-                $servername = "localhost";
-                $username = "root";
-                $dbname = "zerobug";
-                
-                $conn = new mysqli($servername, $username,null,$dbname);
-                
-                if($conn->connect_error){
-                    die("Connection failed:".$conn->connect_error);
-                }
-                
-                $sql = "SELECT * FROM user_details WHERE email ='".$email."' AND password = '".$password."'";
+                $sql = "SELECT * FROM user_details WHERE email ='$email'";
                 
                 $result = $conn->query($sql);
                 
                 if($result->num_rows>0){
                     $record = $result->fetch_assoc();
                     session_start();
+                    if(password_verify($password, $record["password"])){
+                        $_SESSION["loggedInUserId"] = $record["id"];
+                        $_SESSION["loggedIn"] = true;
+
+                        header("Location: ./myDashboard.php");
+                        
+                    }else{
+                        echo "<script> alert('Invalid email or password. Please login again');
+                        window.location.href='index.php';</script>";
+                    }
                      
-                    $_SESSION["loggedInUserId"] = $record["id"];
-                    $_SESSION["loggedIn"] = true;
-                    
-//                    echo "LogIn Successful";
-//                    var_dump($record);
-                    
-                     header("Location:myDashboard.php");
                 }else{
                     
                     echo "<script>

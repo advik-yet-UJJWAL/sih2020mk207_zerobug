@@ -18,10 +18,17 @@
    if($_SERVER["REQUEST_METHOD"] == "POST") {
            
        $firstName = $_POST["first_name"];
+       $firstName= strip_tags($firstName);
+       $firstName= mysqli_real_escape_string($conn,trim($firstName));
        $lastName = $_POST["last_name"];
+       $lastName= strip_tags($lastName);
+       $lastName= mysqli_real_escape_string($conn,trim($lastName));
        $email = $_POST["email"];
+       $email = strip_tags($email);
+       $email = mysqli_real_escape_string($conn , trim($email));
        $password = $_POST["password"];
-       $phone = $_POST['phone']; 
+       $phone = $_POST['phone'];
+       $password= password_hash($password,PASSWORD_BCRYPT);
        
    
    
@@ -36,7 +43,7 @@
          $to = $email;
          $subject = "Registered Successfully ";
          $message = "Hi ".$firstName."You are successfullt registered with us via".$email.".";
-         $header = "From: Team SEWA";
+         $header = "From: Team Zerobug";
          
 
        if($conn->query($sql)){
