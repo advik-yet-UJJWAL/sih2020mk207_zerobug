@@ -87,7 +87,7 @@
     <img src="images/payment.png" alt="">
    </span>
     </div>
-    <h2 class="card__headline card__headline--centered">Past Service Details</h2>
+    <h2 class="card__headline card__headline--centered"><a href="schemes\index.html" style="color: white; text-decoration: none;"> Get Scheme Details</h2></a>
    </div>
    
    <div class="card card--split-4">
@@ -96,7 +96,7 @@
     <img src="images/chat.png" alt="">
    </span>
     </div>
-    <h2 class="card__headline card__headline--centered">Customer Queries</h2>
+    <h2 class="card__headline card__headline--centered"><a href="schemes\forum.php" style="color: white; text-decoration: none;">Customer Queries</h2></a>
    </div>
    
   
