@@ -38,6 +38,7 @@
       </nav>
 
       <a href="signUp.php" class="get-started-btn scrollto">Apply Now</a>
+      <a href="adminDash.php" class="get-started-btn scrollto">Admin Panel</a>
 
     </div>
   </header>

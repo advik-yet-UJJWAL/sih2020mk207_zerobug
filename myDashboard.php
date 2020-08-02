@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-   
+
     <?php
                     session_start(); 
                     if(isset($_SESSION["loggedIn"])) {
@@ -32,7 +32,23 @@
                         header("Location:index.php");
                       }
            ?>
-   
+   <?php
+      if(isset($_POST['subAFScheme'])){
+        if(!empty($_POST['schemes']))  
+          $schemes=json_encode($_POST['schemes']);
+          
+        $sql = "INSERT INTO schemeuser (user, schemes) VALUES ('$id','$schemes')";
+        if ($con->query($sql) === true){
+          header("Location: ?success=1");exit;
+        }
+        else
+          header("Location: ?success=0");exit;
+      }
+      if(isset($_GET['success'])){
+        if($_GET['success']==1) echo 'Successful';
+        if($_GET['success']==0) echo 'Already Applied';
+      }
+   ?>
 <nav class="navbar navbar-expand-lg" style="background-color: #192a56;">
   <a class="navbar-brand" style="color: white; text-decoration: none;" href="">ZeroBugPas</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,10 +74,52 @@
     </header>
     
 <!--This part of code is for profile picture and name & mail-id-->
-  
+<style>
+     #appFSch{
+       display:none;
+       position:fixed;
+       top:0;
+       bottom:0;
+       left:0;
+       right:0;
+       overflow:auto;
+       background:rgba(1, 1, 1, 0.5);
+       z-index:100;
+     }
+     .appFSchC1{
+        padding:20px;
+        width:90%;
+        max-width:400px;
+        height:500px;
+        margin:auto;
+        margin-top:50px;
+        background:white;
+        border-radius:20px;
+        box-shadow: 0px 0px 10px 0px black;
+     }
+     .appFSchC1 input{
+        margin:5px;
+        padding:5px;
+     }
+   </style>
+   <div id='appFSch'>
+     <div class='appFSchC1'>
+       <h2 style='text-align:center;'>Apply For Scheme</h2><br>
+     <form action="" method="post">
+       <?php 
+       if($schemesData=mysqli_query( $con, "SELECT * FROM `schemes`"));
+       while($rowSch=mysqli_fetch_assoc($schemesData)){
+       ?>
+        <input type="checkbox" name='schemes[]' value="<?php echo $rowSch['schemeid']; ?>"><span><?php echo $rowSch['schemename']; ?></span><br>
+       <?php } ?>
+        <input type="submit" name='subAFScheme' value="Submit">
+     </form>
+     </div>
+   </div>
  
 <!--This part of code is for card menu-->
 <main class="main">
+  
    <div class="container">
     <div class="card card--split-1">
     <div class="card__pic">
@@ -89,8 +147,16 @@
     </div>
     <h2 class="card__headline card__headline--centered"><a href="schemes\index.html" style="color: white; text-decoration: none;"> Get Scheme Details</h2></a>
    </div>
-   
    <div class="card card--split-4">
+    <div class="card__pic">
+     <span class="card__placeholder">
+    <img src="images/apply.png" alt="">
+   </span>
+    </div>
+    <h2 class="card__headline card__headline--centered" ><span style="cursor:pointer;" onclick="document.getElementById('appFSch').style.display='block';">Apply For Schemes</span></h2>
+   </div>
+   
+   <div class="card card--split-5">
     <div class="card__pic">
      <span class="card__placeholder">
     <img src="images/chat.png" alt="">

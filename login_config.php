@@ -14,7 +14,6 @@
                 $email = $conn->real_escape_string(strip_tags($_POST["email"]));
                 $password = $conn->real_escape_string(strip_tags($_POST["password"]));
 
-                
                 $sql = "SELECT * FROM user_details WHERE email ='$email'";
                 
                 $result = $conn->query($sql);

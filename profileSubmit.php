@@ -1,10 +1,6 @@
+<?php include 'includes/dbconfig.php'; ?>
 <?php 
 session_start();
-   $servername = "localhost";
-   $username = "root";
-   $dbname = "sewa";
-
-   $conn = mysqli_connect($servername, $username,null,$dbname);
 
    $user_id = $_SESSION["loggedInUserId"];
 
@@ -20,18 +16,18 @@ session_start();
         $pin = $_POST['pin'];
 
 
-        if($conn->connect_error){
-            die("Connection Failed:".$conn->connect_error);
+        if($con->connect_error){
+            die("Connection Failed:".$con->connect_error);
         }
 
         $sql = "INSERT INTO userPersonal_details(father_name,dob,gender,aadhaar,address,district,state,pin,user_id)
                 VALUES ('$father_name','$dob','$gender','$aadhaar','$address','$district','$state','$pin','$user_id')"; 
 
             
-        if($conn->query($sql)){
+        if($con->query($sql)){
             header("location:myDashboard.php");
         }else{
-            echo"Error".$sql."<br>".$conn->error;
+            echo"Error".$sql."<br>".$con->error;
         }
 
 
