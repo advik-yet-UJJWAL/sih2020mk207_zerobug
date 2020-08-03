@@ -77,7 +77,7 @@ if(isset($_SESSION['auser']))
                                 if($schemeD=mysqli_query( $con, "SELECT * FROM `schemes`")){
                                     while($row = mysqli_fetch_assoc($schemeD)){
                             ?>
-							    <li><a href="?p=sc&id=<?php echo $row['schemeid'] ?>"><?php echo $row['schemename'] ?> <b>Users</b></a></li>
+							    <li><a href="?p=sc&id=<?php echo $row['schemeid']; ?>"><?php echo $row['schemename']; ?> <b>Users</b></a></li>
                             <?php
                             }}
                             ?>

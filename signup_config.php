@@ -37,8 +37,8 @@
         }
 
 
-       $sql = "INSERT INTO user_details (first_name,last_name,email,password,phone)
-         VALUES('".$firstName."','".$lastName."','".$email."','".$password."','".$phone."')";
+       $sql = "INSERT INTO user_details (first_name,last_name,email,`password`,phone,`isUpdated`)
+         VALUES('".$firstName."','".$lastName."','".$email."','".$password."','".$phone."','false')";
 
          $to = $email;
          $subject = "Registered Successfully ";

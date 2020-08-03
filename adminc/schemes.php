@@ -28,8 +28,6 @@ th, td {
 
       if($schemes) if (in_array($schid, $schemes)){
         $id=$row['user'];
-        if($udata=mysqli_query( $con, "SELECT * FROM `userpersonal_details` WHERE `user_id`='$id'"))
-            $rowu = mysqli_fetch_assoc($udata);
         if($udata2=mysqli_query( $con, "SELECT * FROM `user_details` WHERE `id`='$id'"))
             $rowu2 = mysqli_fetch_assoc($udata2);
 ?>
@@ -37,7 +35,7 @@ th, td {
     <td><?php echo $rowu2['first_name'].$rowu2['last_name']; ?></td>
     <td><?php echo $rowu2['phone']; ?></td>
     <td><?php echo $rowu2['email']; ?></td>
-    <td><?php echo $rowu['aadhaar']; ?></td>
+    <td><?php echo $rowu2['aadhaar']; ?></td>
   </tr>
 <?php 
     }}

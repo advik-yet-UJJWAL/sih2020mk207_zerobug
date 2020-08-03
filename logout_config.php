@@ -3,7 +3,6 @@
       session_destroy();  
       echo "<script>
                 alert('Logged Out Successfully');
-                window.location.href='index.php';
+                window.location.href='index.html';
             </script>";
-      
 ?>

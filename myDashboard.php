@@ -11,62 +11,62 @@
 </head>
 <body>
 
-    <?php
-                    session_start(); 
-                    if(isset($_SESSION["loggedIn"])) {
-                        if(!empty($_SESSION["loggedInUserId"])) {
-                            $id = $_SESSION["loggedInUserId"];
-                            
-                            
-                            
-                            $sql = "SELECT * FROM user_details WHERE id = ".$id;
-                            $result = $con->query($sql);
-                            $record = $result->fetch_assoc(); 
-                            
-//                            $sql_img = "SELECT Image FROM user WHERE Id = ".$id;
-//                            $result_img = $conn->query($sql);
-//                            $record_img = $result->fetch_assoc();   
-                        }
-                       
-                    }else {
-                        header("Location:index.php");
-                      }
-           ?>
-   <?php
-      if(isset($_POST['subAFScheme'])){
-        if(!empty($_POST['schemes']))  
-          $schemes=json_encode($_POST['schemes']);
-          
-        $sql = "INSERT INTO schemeuser (user, schemes) VALUES ('$id','$schemes')";
-        if ($con->query($sql) === true){
-          header("Location: ?success=1");exit;
+<?php
+  session_start(); 
+  if(isset($_SESSION["loggedIn"])) {
+    if(!empty($_SESSION["loggedInUserId"])) {
+      $id = $_SESSION["loggedInUserId"];
+      $sql = "SELECT * FROM user_details WHERE id = ".$id;
+      if($result = $con->query($sql)){
+        $record = $result->fetch_assoc();
+        if($record['isUpdated']=='false'){
+          header('Location: profile.php');exit;
         }
-        else
-          header("Location: ?success=0");exit;
       }
-      if(isset($_GET['success'])){
-        if($_GET['success']==1) echo 'Successful';
-        if($_GET['success']==0) echo 'Already Applied';
-      }
-   ?>
+      // $sql_img = "SELECT Image FROM user WHERE Id = ".$id;
+      // $result_img = $conn->query($sql);
+      // $record_img = $result->fetch_assoc();
+    }
+  }
+  else {
+    header("Location:index.html");exit;
+  }
+?>
+<?php
+  if(isset($_POST['subAFScheme'])){
+    if(!empty($_POST['schemes']))
+      $schemes=json_encode($_POST['schemes']);
+      
+    $sql = "INSERT INTO schemeuser (user, schemes) VALUES ('$id','$schemes')";
+    if ($con->query($sql) === true){
+      header("Location: ?success=1");exit;
+    }
+    else
+      header("Location: ?success=0");exit;
+  }
+  if(isset($_GET['success'])){
+    if($_GET['success']==1) echo 'Successful';
+    if($_GET['success']==0) echo 'Already Applied';
+  }
+?>
 <nav class="navbar navbar-expand-lg" style="background-color: #192a56;">
   <a class="navbar-brand" style="color: white; text-decoration: none;" href="">ZeroBugPas</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <span style='display:block;border:2px solid white;width:30px;margin:5px;border-radius:20px;'></span>
+    <span style='display:block;border:2px solid white;width:30px;margin:5px;border-radius:20px;'></span>
+    <span style='display:block;border:2px solid white;width:30px;margin:5px;border-radius:20px;'></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" style="color: white; text-decoration: none;" href="">Welcome,&nbsp;<?php echo $record["first_name"]; ?></a>
+        <a class="nav-link" style="color: white; text-decoration: none;" href="">Welcome <b><?php echo $record["first_name"]; ?></b></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" style="color: white; text-decoration: none; margin-left: 1600%;" href="logout_config.php">Logout</a>
+        <a class="nav-link" style="color: white; text-decoration: none;" href="logout_config.php">LogOut</a>
       </li>
     </ul>
   </div>
 </nav>
-   
-   
     <header>
         <div id="head">
             <h2>Dashboard</h2>
@@ -74,7 +74,7 @@
     </header>
     
 <!--This part of code is for profile picture and name & mail-id-->
-<style>
+    <style>
      #appFSch{
        display:none;
        position:fixed;
@@ -97,9 +97,17 @@
         border-radius:20px;
         box-shadow: 0px 0px 10px 0px black;
      }
-     .appFSchC1 input{
+     .appFSchC1 input, .appFSchC1 button{
         margin:5px;
         padding:5px;
+        border:none;
+        border-radius:10px;
+        background:lightblue;
+        min-width:35px;
+     }
+     .appFSchC1 input:hover, .appFSchC1 button:hover{
+        background:blue;
+        color:white;
      }
    </style>
    <div id='appFSch'>
@@ -114,6 +122,7 @@
        <?php } ?>
         <input type="submit" name='subAFScheme' value="Submit">
      </form>
+     <button onclick='document.getElementById("appFSch").style.display="none";'>X</button>
      </div>
    </div>
  
@@ -136,7 +145,7 @@
     <img src="images/service.png" alt="">
    </span>
     </div>
-        <h2 class="card__headline card__headline--centered" ><a href="Apply_Services.php" style="color: white; text-decoration: none;" data-toggle="modal" data-target="#categoryModal">New Services</a></h2>
+        <h2 class="card__headline card__headline--centered" ><a href="#" style="color: white; text-decoration: none;" data-toggle="modal" data-target="#categoryModal">New Services</a></h2>
    </div>
    
    <div class="card card--split-3">
@@ -176,7 +185,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="test.php" method="post">
+      <form action="" method="post">
       <div class="modal-body">
          
         <div class="input-group mb-3">

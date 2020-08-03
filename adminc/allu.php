@@ -21,8 +21,6 @@ th, td {
     if($data=mysqli_query( $con, "SELECT * FROM `user_details`"));
     while($row = mysqli_fetch_assoc($data)){
         $id=$row['id'];
-        if($udata=mysqli_query( $con, "SELECT * FROM `userpersonal_details` WHERE `user_id`='$id'"))
-            $rowu = mysqli_fetch_assoc($udata);
         if($udata2=mysqli_query( $con, "SELECT * FROM `schemeuser` WHERE `user`='$id'"))
             $rowu2 = mysqli_fetch_assoc($udata2);
 ?>
@@ -30,7 +28,7 @@ th, td {
     <td><?php echo $row['first_name'].' '.$row['last_name']; ?></td>
     <td><?php echo $row['phone']; ?></td>
     <td><?php echo $row['email']; ?></td>
-    <td><?php echo $rowu['aadhaar']; ?></td>
+    <td><?php echo $row['aadhaar']; ?></td>
     <td>
         <?php 
             $schemes=json_decode($rowu2['schemes']);

@@ -6,8 +6,9 @@
             $schId=array();
             array_push($schId,$_POST['schId']);
             $schId=json_encode ($schId);
-            //print_r($schId);
-        if($con->query("UPDATE `schemeuser` SET `schemes`='$schId'WHERE `schemeuser`.`user` = ".$usrId));
+        if($con->query("UPDATE `schemeuser` SET `schemes`='$schId'WHERE `schemeuser`.`user` = ".$usrId)){
+            header('Location: adminDash.php?p=redu');exit;
+        }
         else echo 'Please Try Again';
     }
 ?>
@@ -36,8 +37,6 @@ th, td {
         $schemes = json_decode($row['schemes']);
         if($schemes)if(sizeof($schemes)>1){
             $id=$row['user'];
-            if($udata=mysqli_query( $con, "SELECT * FROM `userpersonal_details` WHERE `user_id`='$id'"))
-                $rowu = mysqli_fetch_assoc($udata);
             if($udata2=mysqli_query( $con, "SELECT * FROM `user_details` WHERE `id`='$id'"))
                 $rowu2 = mysqli_fetch_assoc($udata2);
 ?>
@@ -45,7 +44,7 @@ th, td {
     <td><?php echo $rowu2['first_name'].' '.$rowu2['last_name']; ?></td>
     <td><?php echo $rowu2['phone']; ?></td>
     <td><?php echo $rowu2['email']; ?></td>
-    <td><?php echo $rowu['aadhaar']; ?></td>
+    <td><?php echo $rowu2['aadhaar']; ?></td>
     <td>
         <?php
             foreach ($schemes as $key=>$value) {
