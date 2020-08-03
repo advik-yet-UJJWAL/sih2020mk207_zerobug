@@ -1,0 +1,17 @@
+"1","admin","admin123"
+"1","Finance","2019-09-20","1",
+"2","Health","2019-09-20","1",
+"4","Scheme 1","google.com","qwertyuioiytreqwrtdy","1","2","1"
+"5","Scheme 2","google.com","frgthyjtkfgffhkuhd","1","1","1"
+"6","Scheme 3 ","google.com","bchcbehcblwhlnwgxdgdygd","1","2","1"
+"7","Scheme 4","google.com","None","1","1","1"
+"12","38","[""5"",""4""]"
+"14","39","[""6""]"
+"15","40","[""5"",""6""]"
+"1","Odisha","1"
+"2","West Bengal","1"
+"3","Karnataka","1"
+"4","Assam","1"
+"38","A","B","a@a","$2y$10$IwENpi9ubHx7RwbiQOzh8uI0KwCn.dVh49cbeOxT3SJ17DO/z8VnK","12345678","true","KK","2020-08-04","Male","123456789012",NULL,NULL,NULL,NULL,NULL,NULL,NULL
+"39","k","q","k@k","$2y$10$iK3lA7ITdZZTHyd9cLE35O7Qv2lDFYmGZkW47TZQl8eRVhOWd0XBG","2324567","true","JJ","2020-02-22","Male","666430376110","wqer","qwer","wqer","201301","wqer","12345","2345"
+"40","Yadi","KK","yadi@y","$2y$10$z9e66uCt787wyQ1JWC.sh.FQWiWiU5auXRE.BpzfdRhmLwzgYOmNS","1111111","true","AA","2020-08-04","Male","424353612345",NULL,NULL,NULL,NULL,NULL,NULL,NULL
